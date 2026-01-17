@@ -61,7 +61,7 @@ nav a:hover{color:var(--text)}
 section{
   max-width:1200px;
   margin:auto;
-  padding:5rem 1.5rem; /* reduced spacing */
+  padding:5rem 1.5rem;
   opacity:0;
   transform:translateY(28px);
   transition:1s cubic-bezier(.16,1,.3,1)
@@ -148,17 +148,19 @@ section.visible{opacity:1;transform:none}
   z-index:2
 }
 
+/* FIX: move title away from center image */
 .vinyl span{
   position:absolute;
   inset:0;
   display:flex;
-  align-items:center;
+  align-items:flex-end;
   justify-content:center;
+  padding-bottom:12%;
   font-size:.75rem;
   letter-spacing:.35em;
   color:var(--muted);
-  transform:rotate(-90deg);
-  pointer-events:none
+  pointer-events:none;
+  z-index:3
 }
 
 /* MODAL */
@@ -250,7 +252,7 @@ footer{text-align:center;padding:4rem 1.5rem;color:var(--muted);font-size:.85rem
     </a>
 
     <a class="vinyl" href="https://www.youtube.com/watch?v=wsHI4iYOxJA" target="_blank">
-      <img src="Si Veo a Tu Mamá (DJ Afro Remix).jpg">
+      <img src="Si Veo a Tu Mamá (DJ Afro Remix).jpg">
       <span>SI VEO A TU MAMÁ • DJ AFRO REMIX</span>
     </a>
 
