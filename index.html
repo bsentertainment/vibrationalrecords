@@ -8,245 +8,296 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-:root {
-  --bg: #050505;
-  --bg-light: #f6f6f6;
-  --panel: rgba(255,255,255,0.06);
-  --panel-light: rgba(0,0,0,0.05);
-  --text: #f5f5f5;
-  --text-light: #0a0a0a;
-  --muted: #9a9a9a;
-  --accent: #d4af37;
-  --radius: 18px;
+:root{
+  --bg:#050505;
+  --panel:rgba(255,255,255,.06);
+  --border:rgba(255,255,255,.12);
+  --text:#f5f5f5;
+  --muted:#9a9a9a;
+  --accent:#d4af37;
 }
 
-@media (prefers-color-scheme: light) {
-  body {
-    background: var(--bg-light);
-    color: var(--text-light);
+@media (prefers-color-scheme: light){
+  :root{
+    --bg:#f5f5f5;
+    --panel:rgba(0,0,0,.05);
+    --border:rgba(0,0,0,.12);
+    --text:#111;
+    --muted:#555;
   }
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,sans-serif}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  transition:.6s cubic-bezier(.16,1,.3,1)
+}
+a{text-decoration:none;color:inherit}
+
+/* LOADER */
+#loader{
+  position:fixed;inset:0;
+  background:var(--bg);
+  display:grid;
+  place-items:center;
+  z-index:9999;
+  animation:fadeOut 1.2s ease forwards;
+  animation-delay:1.6s
+}
+#loader img{
+  width:120px;
+  animation:pulse 1.6s ease infinite
+}
+@keyframes pulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.08)}
+}
+@keyframes fadeOut{
+  to{opacity:0;pointer-events:none}
 }
 
-body {
-  background: radial-gradient(circle at top, #0c0c0c, var(--bg));
-  color: var(--text);
-  overflow-x: hidden;
+/* GRAIN */
+#grain{
+  position:fixed;inset:0;
+  pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+  mix-blend-mode:overlay;
+  z-index:5
 }
 
-a { color: inherit; text-decoration: none; }
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;
+  display:flex;justify-content:center;
+  gap:1.8rem;
+  padding:1rem;
+  backdrop-filter:blur(14px);
+  background:rgba(0,0,0,.55);
+  border-bottom:1px solid var(--border);
+  z-index:100
+}
+nav a{font-size:.85rem;color:var(--muted)}
+nav a:hover{color:var(--text)}
 
-section {
-  max-width: 1200px;
-  margin: auto;
-  padding: 6rem 1.5rem;
+section{
+  max-width:1200px;
+  margin:auto;
+  padding:7rem 1.5rem;
+  opacity:0;
+  transform:translateY(28px);
+  transition:1s cubic-bezier(.16,1,.3,1)
+}
+section.visible{opacity:1;transform:none}
+
+.hero{
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  text-align:center
+}
+.hero img{width:180px;margin-bottom:2rem}
+.hero h1{font-size:clamp(2.6rem,6vw,4.4rem)}
+.hero p{color:var(--muted)}
+
+.title{font-size:2rem;margin-bottom:1rem}
+.sub{color:var(--muted);max-width:720px;margin-bottom:3rem}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:1.6rem
+}
+.card{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:1.8rem;
+  transition:.5s cubic-bezier(.16,1,.3,1);
+  cursor:pointer
+}
+.card:hover{
+  transform:translateY(-8px);
+  border-color:var(--accent)
 }
 
-.hidden { display: none; }
-
-/* ---------- INTRO LOADER ---------- */
-#loader {
-  position: fixed;
-  inset: 0;
-  background: #000;
-  display: grid;
-  place-items: center;
-  z-index: 999;
+.btn{
+  display:inline-block;
+  padding:.85rem 1.4rem;
+  border-radius:999px;
+  background:var(--panel);
+  border:1px solid var(--border);
+  font-size:.85rem;
+  margin:.3rem .2rem;
+  transition:.3s
+}
+.btn:hover{
+  background:var(--accent);
+  color:#000
 }
 
-#loader img {
-  width: 120px;
-  animation: pulse 2s ease-in-out infinite;
+/* RELEASES */
+.release{position:relative;border-radius:16px;overflow:hidden}
+.release img{width:100%;transition:1.1s cubic-bezier(.16,1,.3,1)}
+.release:hover img{transform:scale(1.08)}
+.release span{
+  position:absolute;inset:0;
+  display:grid;place-items:center;
+  font-size:2.5rem;
+  opacity:0;
+  transition:.4s
+}
+.release:hover span{opacity:.85}
+
+/* MODAL */
+.modal{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.7);
+  backdrop-filter:blur(18px);
+  display:none;
+  place-items:center;
+  z-index:500
+}
+.modal.active{display:grid}
+.modal .box{
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:22px;
+  max-width:700px;
+  width:90%;
+  padding:2.5rem;
+  animation:pop .6s cubic-bezier(.16,1,.3,1)
+}
+@keyframes pop{from{transform:scale(.92);opacity:0}}
+
+/* FORM */
+form{max-width:620px}
+input,select,textarea{
+  width:100%;
+  background:var(--panel);
+  border:1px solid var(--border);
+  color:var(--text);
+  padding:1rem;
+  border-radius:14px;
+  margin-bottom:1rem
 }
 
-@keyframes pulse {
-  0%,100% { opacity: .6; }
-  50% { opacity: 1; }
-}
-
-/* ---------- FILM GRAIN ---------- */
-#grain {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
-  mix-blend-mode: overlay;
-  z-index: 10;
-}
-
-/* ---------- HERO ---------- */
-.hero {
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-  text-align: center;
-}
-
-.hero img {
-  width: 180px;
-  margin-bottom: 2rem;
-}
-
-.hero h1 {
-  font-size: clamp(2.4rem, 6vw, 4rem);
-  letter-spacing: -0.04em;
-}
-
-.hero p {
-  color: var(--muted);
-  margin-top: 1rem;
-}
-
-/* ---------- UI ---------- */
-.title {
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
-}
-
-.sub {
-  color: var(--muted);
-  max-width: 700px;
-  margin-bottom: 3rem;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.5rem;
-}
-
-.card {
-  background: var(--panel);
-  border-radius: var(--radius);
-  padding: 1.8rem;
-  transition: transform .4s ease;
-}
-
-.card:hover { transform: translateY(-6px); }
-
-/* ---------- BUTTONS ---------- */
-.btn {
-  display: inline-block;
-  padding: .9rem 1.5rem;
-  border-radius: 999px;
-  background: var(--panel);
-  margin: .3rem;
-  font-size: .9rem;
-}
-
-.btn:hover {
-  background: var(--accent);
-  color: #000;
-}
-
-/* ---------- RELEASES ---------- */
-.release img {
-  width: 100%;
-  border-radius: 14px;
-}
-
-/* ---------- EMAIL ---------- */
-input {
-  width: 100%;
-  padding: 1rem;
-  border-radius: 12px;
-  border: none;
-  margin-top: 1rem;
-}
-
-/* ---------- FOOTER ---------- */
-footer {
-  text-align: center;
-  padding: 4rem 1.5rem;
-  color: var(--muted);
-  font-size: .85rem;
-}
+footer{text-align:center;padding:4rem 1.5rem;color:var(--muted);font-size:.85rem}
 </style>
 </head>
 
 <body>
 
-<div id="loader">
-  <img src="vrArt.jpg">
-</div>
-
+<div id="loader"><img src="vrArt.jpg"></div>
 <div id="grain"></div>
 
-<!-- HERO -->
-<section class="hero">
+<nav>
+  <a href="#label">Label</a>
+  <a href="#services">Services</a>
+  <a href="#artists">Artists</a>
+  <a href="#releases">Releases</a>
+  <a href="#booking">Booking</a>
+</nav>
+
+<section class="hero visible">
   <img src="vrArt.jpg">
   <h1>Vibrational Records</h1>
-  <p>Resonance you can’t silence.</p>
+  <p>Independent label & creative studio</p>
 </section>
 
-<!-- SERVICES -->
-<section>
-  <h2 class="title">Services & Pricing</h2>
-  <img src="services.jpg" style="width:100%;border-radius:18px;margin-bottom:3rem">
+<section id="label">
+  <h2 class="title">The Label</h2>
+  <p class="sub">Music, culture, and technology driven by emotion and longevity.</p>
 </section>
 
-<!-- ARTISTS -->
-<section>
-  <h2 class="title">Artists</h2>
-
+<section id="services">
+  <h2 class="title">Services</h2>
   <div class="grid">
-    <div class="card">
-      <h3>Quincho</h3>
-      <p>Electronic / Afro / Club</p>
-      <a class="btn" href="https://quincho.art/" target="_blank">Website</a>
-      <a class="btn" href="https://www.instagram.com/quinchomusic/" target="_blank">Instagram</a>
-      <a class="btn" href="https://open.spotify.com/artist/2IfHdCurUyGRepjKTS02bd" target="_blank">Spotify</a>
-    </div>
-
-    <div class="card">
-      <h3>Samu</h3>
-      <p>DJ / Producer</p>
-      <a class="btn" href="https://www.instagram.com/samuuuuuuuuuuv/" target="_blank">Website</a>
-      <a class="btn" href="https://open.spotify.com/artist/51FEMYGwPrDBRaHO7HyIcq" target="_blank">Spotify</a>
-    </div>
+    <div class="card">Music Production — $79</div>
+    <div class="card">Mixing & Mastering — $149</div>
+    <div class="card">Recording Session — $59</div>
+    <div class="card">3-in-1 Package — $189</div>
+    <div class="card">Label Split — 15%</div>
   </div>
 </section>
 
-<!-- RELEASES -->
-<section>
+<section id="artists">
+  <h2 class="title">Artists</h2>
+  <div class="grid">
+    <div class="card" onclick="openModal('joaquin')">Joaquin</div>
+    <div class="card" onclick="openModal('samu')">Samu</div>
+  </div>
+</section>
+
+<section id="releases">
   <h2 class="title">Releases</h2>
   <div class="grid">
     <div class="release">
-      <img src="https://via.placeholder.com/600x600?text=Release+01">
+      <img src="Imaginate (DJ Afro Remix).jpg">
+      <span>▶</span>
     </div>
     <div class="release">
-      <img src="https://via.placeholder.com/600x600?text=Release+02">
+      <img src="Si Veo a Tu Mamá (DJ Afro Remix).jpg">
+      <span>▶</span>
     </div>
   </div>
 </section>
 
-<!-- EMAIL -->
-<section>
-  <h2 class="title">Stay Connected</h2>
-  <p class="sub">Early access to releases, events, and opportunities.</p>
-  <input type="email" placeholder="Email address">
+<section id="booking">
+  <h2 class="title">Booking</h2>
+  <form action="mailto:bsentholdings@gmail.com" method="POST" enctype="text/plain">
+    <input name="Name" placeholder="Name" required>
+    <input name="Email" type="email" placeholder="Email" required>
+    <select name="Service">
+      <option>Music Production</option>
+      <option>Mixing & Mastering</option>
+      <option>Recording</option>
+      <option>Booking</option>
+    </select>
+    <select name="Artist">
+      <option>Joaquin</option>
+      <option>Samu</option>
+    </select>
+    <textarea name="Message" placeholder="Project details"></textarea>
+    <button class="btn">Send Inquiry</button>
+  </form>
 </section>
 
-<!-- CONNECT -->
-<section>
-  <h2 class="title">Connect</h2>
-  <a class="btn" href="https://www.instagram.com/vibrationalrecords/" target="_blank">Instagram</a>
-  <a class="btn" href="https://soundcloud.com/bendersociety" target="_blank">SoundCloud</a>
-</section>
+<footer>© <span id="year"></span> Vibrational Records</footer>
 
-<footer>
-  © <span id="year"></span> Vibrational Records
-</footer>
+<!-- MODALS -->
+<div class="modal" id="modal">
+  <div class="box" id="modalContent"></div>
+</div>
 
 <script>
-document.getElementById("year").textContent = new Date().getFullYear();
-setTimeout(() => document.getElementById("loader").style.display = "none", 1800);
+document.getElementById("year").textContent=new Date().getFullYear();
+
+const sections=document.querySelectorAll("section");
+const obs=new IntersectionObserver(e=>{
+  e.forEach(x=>{if(x.isIntersecting)x.target.classList.add("visible")})
+},{threshold:.15});
+sections.forEach(s=>obs.observe(s));
+
+const modal=document.getElementById("modal");
+const content=document.getElementById("modalContent");
+
+function openModal(artist){
+  modal.classList.add("active");
+  content.innerHTML=artist==="joaquin"?
+  `<h2>Joaquin</h2>
+   <p>Producer / DJ</p>
+   <a class="btn" href="https://music.apple.com/us/artist/joaquin/1832623241" target="_blank">Apple Music</a>
+   <a class="btn" href="https://www.youtube.com/@joaquinsounds" target="_blank">YouTube</a>
+   <a class="btn" href="https://soundcloud.com/joaquinsounds" target="_blank">SoundCloud</a>
+   <a class="btn" href="https://www.tiktok.com/@quinchomusic" target="_blank">TikTok</a>` :
+  `<h2>Samu</h2>
+   <p>DJ / Producer</p>
+   <a class="btn" href="https://music.apple.com/us/artist/joaquin-samu/1838100911" target="_blank">Apple Music</a>
+   <a class="btn" href="https://instagram.com/samuuuuuuuuuuv" target="_blank">Instagram</a>`;
+}
+modal.onclick=()=>modal.classList.remove("active");
 </script>
 
 </body>
