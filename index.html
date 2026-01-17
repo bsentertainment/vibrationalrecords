@@ -1,286 +1,253 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vibrational Records</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vibrational Records</title>
 
-  <!-- SEO -->
-  <meta name="description" content="Vibrational Records — Resonance you can’t silence. Independent label, production, distribution, and artist development." />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #050505;
+  --bg-light: #f6f6f6;
+  --panel: rgba(255,255,255,0.06);
+  --panel-light: rgba(0,0,0,0.05);
+  --text: #f5f5f5;
+  --text-light: #0a0a0a;
+  --muted: #9a9a9a;
+  --accent: #d4af37;
+  --radius: 18px;
+}
 
-  <style>
-    :root {
-      --bg: #050505;
-      --panel: rgba(255,255,255,0.05);
-      --border: rgba(255,255,255,0.12);
-      --text: #f5f5f5;
-      --muted: #a1a1a1;
-      --accent: #d4af37;
-      --glow: 0 0 40px rgba(212,175,55,0.15);
-    }
+@media (prefers-color-scheme: light) {
+  body {
+    background: var(--bg-light);
+    color: var(--text-light);
+  }
+}
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+}
 
-    body {
-      background: radial-gradient(circle at top, #0b0b0b, var(--bg));
-      color: var(--text);
-      overflow-x: hidden;
-    }
+body {
+  background: radial-gradient(circle at top, #0c0c0c, var(--bg));
+  color: var(--text);
+  overflow-x: hidden;
+}
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+a { color: inherit; text-decoration: none; }
 
-    /* --- HERO --- */
-    .hero {
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      text-align: center;
-      padding: 4rem 1.5rem;
-    }
+section {
+  max-width: 1200px;
+  margin: auto;
+  padding: 6rem 1.5rem;
+}
 
-    .logo {
-      width: 180px;
-      margin-bottom: 2rem;
-      filter: drop-shadow(var(--glow));
-      animation: float 6s ease-in-out infinite;
-    }
+.hidden { display: none; }
 
-    @keyframes float {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
+/* ---------- INTRO LOADER ---------- */
+#loader {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: grid;
+  place-items: center;
+  z-index: 999;
+}
 
-    .hero h1 {
-      font-size: clamp(2.2rem, 5vw, 4rem);
-      font-weight: 600;
-      letter-spacing: -0.04em;
-    }
+#loader img {
+  width: 120px;
+  animation: pulse 2s ease-in-out infinite;
+}
 
-    .hero p {
-      margin-top: 1rem;
-      font-size: 1.1rem;
-      color: var(--muted);
-    }
+@keyframes pulse {
+  0%,100% { opacity: .6; }
+  50% { opacity: 1; }
+}
 
-    .divider {
-      width: 80px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--accent), transparent);
-      margin: 2.5rem auto;
-    }
+/* ---------- FILM GRAIN ---------- */
+#grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  z-index: 10;
+}
 
-    /* --- SECTIONS --- */
-    section {
-      padding: 6rem 1.5rem;
-      max-width: 1200px;
-      margin: auto;
-    }
+/* ---------- HERO ---------- */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
 
-    .section-title {
-      font-size: 1.8rem;
-      margin-bottom: 1.5rem;
-      letter-spacing: -0.03em;
-    }
+.hero img {
+  width: 180px;
+  margin-bottom: 2rem;
+}
 
-    .section-sub {
-      color: var(--muted);
-      max-width: 700px;
-      margin-bottom: 3rem;
-    }
+.hero h1 {
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  letter-spacing: -0.04em;
+}
 
-    /* --- GLASS GRID --- */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-    }
+.hero p {
+  color: var(--muted);
+  margin-top: 1rem;
+}
 
-    .card {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      padding: 1.8rem;
-      border-radius: 18px;
-      backdrop-filter: blur(10px);
-      transition: transform .4s ease, box-shadow .4s ease;
-    }
+/* ---------- UI ---------- */
+.title {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
 
-    .card:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--glow);
-    }
+.sub {
+  color: var(--muted);
+  max-width: 700px;
+  margin-bottom: 3rem;
+}
 
-    .card h3 {
-      font-weight: 500;
-      margin-bottom: .6rem;
-    }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
 
-    .card p {
-      font-size: .95rem;
-      color: var(--muted);
-      line-height: 1.6;
-    }
+.card {
+  background: var(--panel);
+  border-radius: var(--radius);
+  padding: 1.8rem;
+  transition: transform .4s ease;
+}
 
-    /* --- IMAGE STRIP --- */
-    .image-strip {
-      margin: 5rem 0;
-      border-radius: 22px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-    }
+.card:hover { transform: translateY(-6px); }
 
-    .image-strip img {
-      width: 100%;
-      display: block;
-    }
+/* ---------- BUTTONS ---------- */
+.btn {
+  display: inline-block;
+  padding: .9rem 1.5rem;
+  border-radius: 999px;
+  background: var(--panel);
+  margin: .3rem;
+  font-size: .9rem;
+}
 
-    /* --- LINKS --- */
-    .links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-top: 2rem;
-    }
+.btn:hover {
+  background: var(--accent);
+  color: #000;
+}
 
-    .link {
-      padding: .9rem 1.4rem;
-      border-radius: 999px;
-      background: var(--panel);
-      border: 1px solid var(--border);
-      font-size: .9rem;
-      transition: all .3s ease;
-    }
+/* ---------- RELEASES ---------- */
+.release img {
+  width: 100%;
+  border-radius: 14px;
+}
 
-    .link:hover {
-      background: var(--accent);
-      color: #000;
-    }
+/* ---------- EMAIL ---------- */
+input {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 12px;
+  border: none;
+  margin-top: 1rem;
+}
 
-    /* --- FOOTER --- */
-    footer {
-      padding: 4rem 1.5rem;
-      text-align: center;
-      color: var(--muted);
-      font-size: .85rem;
-    }
-
-    /* --- REVEAL --- */
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all .8s ease;
-    }
-
-    .reveal.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  </style>
+/* ---------- FOOTER ---------- */
+footer {
+  text-align: center;
+  padding: 4rem 1.5rem;
+  color: var(--muted);
+  font-size: .85rem;
+}
+</style>
 </head>
 
 <body>
 
-  <!-- HERO -->
-  <div class="hero">
-    <img src="vrART.jpg" alt="Vibrational Records Logo" class="logo" />
-    <h1>Vibrational Records</h1>
-    <p>Resonance you can’t silence.</p>
-    <div class="divider"></div>
+<div id="loader">
+  <img src="vrArt.jpg">
+</div>
+
+<div id="grain"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <img src="vrArt.jpg">
+  <h1>Vibrational Records</h1>
+  <p>Resonance you can’t silence.</p>
+</section>
+
+<!-- SERVICES -->
+<section>
+  <h2 class="title">Services & Pricing</h2>
+  <img src="services.jpg" style="width:100%;border-radius:18px;margin-bottom:3rem">
+</section>
+
+<!-- ARTISTS -->
+<section>
+  <h2 class="title">Artists</h2>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Quincho</h3>
+      <p>Electronic / Afro / Club</p>
+      <a class="btn" href="https://quincho.art/" target="_blank">Website</a>
+      <a class="btn" href="https://www.instagram.com/quinchomusic/" target="_blank">Instagram</a>
+      <a class="btn" href="https://open.spotify.com/artist/2IfHdCurUyGRepjKTS02bd" target="_blank">Spotify</a>
+    </div>
+
+    <div class="card">
+      <h3>Samu</h3>
+      <p>DJ / Producer</p>
+      <a class="btn" href="https://www.instagram.com/samuuuuuuuuuuv/" target="_blank">Website</a>
+      <a class="btn" href="https://open.spotify.com/artist/51FEMYGwPrDBRaHO7HyIcq" target="_blank">Spotify</a>
+    </div>
   </div>
+</section>
 
-  <!-- MANIFESTO -->
-  <section class="reveal">
-    <h2 class="section-title">The Label</h2>
-    <p class="section-sub">
-      Vibrational Records is an independent creative ecosystem focused on
-      high-fidelity sound, artist development, and cultural impact.
-      We operate where technology, nightlife, and emotion intersect.
-    </p>
-  </section>
-
-  <!-- IMAGE -->
-  <section class="reveal">
-    <div class="image-strip">
-      <img src="Screenshot 2026-01-17 at 4.43.14 PM.png" alt="Vibrational Records Services">
+<!-- RELEASES -->
+<section>
+  <h2 class="title">Releases</h2>
+  <div class="grid">
+    <div class="release">
+      <img src="https://via.placeholder.com/600x600?text=Release+01">
     </div>
-  </section>
-
-  <!-- SERVICES -->
-  <section class="reveal">
-    <h2 class="section-title">What We Do</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Music Production</h3>
-        <p>Full instrumental production tailored to the artist’s sound.</p>
-      </div>
-      <div class="card">
-        <h3>Mixing & Mastering</h3>
-        <p>Industry-standard mixes with loud, clean masters.</p>
-      </div>
-      <div class="card">
-        <h3>Recording Sessions</h3>
-        <p>Professional studio sessions with an experienced engineer.</p>
-      </div>
-      <div class="card">
-        <h3>Distribution</h3>
-        <p>Unlimited releases with royalty collection and artist support.</p>
-      </div>
-      <div class="card">
-        <h3>Education</h3>
-        <p>Private production crash courses and creative mentorship.</p>
-      </div>
+    <div class="release">
+      <img src="https://via.placeholder.com/600x600?text=Release+02">
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ARTISTS -->
-  <section class="reveal">
-    <h2 class="section-title">Artists & Network</h2>
-    <div class="links">
-      <a class="link" href="https://open.spotify.com/artist/51FEMYGwPrDBRaHO7HyIcq" target="_blank">Joaquin</a>
-      <a class="link" href="https://open.spotify.com/artist/2IfHdCurUyGRepjKTS02bd" target="_blank">Quincho</a>
-      <a class="link" href="https://www.instagram.com/quinchomusic/" target="_blank">@quinchomusic</a>
-      <a class="link" href="https://www.instagram.com/samuuuuuuuuuuv/" target="_blank">@samuuuuuuuuuuv</a>
-    </div>
-  </section>
+<!-- EMAIL -->
+<section>
+  <h2 class="title">Stay Connected</h2>
+  <p class="sub">Early access to releases, events, and opportunities.</p>
+  <input type="email" placeholder="Email address">
+</section>
 
-  <!-- CONNECT -->
-  <section class="reveal">
-    <h2 class="section-title">Connect</h2>
-    <div class="links">
-      <a class="link" href="https://www.instagram.com/vibrationalrecords/" target="_blank">Instagram</a>
-      <a class="link" href="https://soundcloud.com/bendersociety" target="_blank">SoundCloud</a>
-      <a class="link" href="https://quincho.art/" target="_blank">quincho.art</a>
-    </div>
-  </section>
+<!-- CONNECT -->
+<section>
+  <h2 class="title">Connect</h2>
+  <a class="btn" href="https://www.instagram.com/vibrationalrecords/" target="_blank">Instagram</a>
+  <a class="btn" href="https://soundcloud.com/bendersociety" target="_blank">SoundCloud</a>
+</section>
 
-  <footer>
-    © <span id="year"></span> Vibrational Records. All rights reserved.
-  </footer>
+<footer>
+  © <span id="year"></span> Vibrational Records
+</footer>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-        }
-      });
-    }, { threshold: 0.15 });
-
-    reveals.forEach(r => observer.observe(r));
-  </script>
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+setTimeout(() => document.getElementById("loader").style.display = "none", 1800);
+</script>
 
 </body>
 </html>
