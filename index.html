@@ -119,7 +119,7 @@ section.visible{opacity:1;transform:none}
 }
 .btn:hover{background:var(--accent);color:#000}
 
-/* ===== VINYL RELEASES ===== */
+/* VINYL */
 .vinyl{
   position:relative;
   width:100%;
@@ -143,8 +143,7 @@ section.visible{opacity:1;transform:none}
     rgba(255,255,255,.02) 1px,
     transparent 3px,
     transparent 6px
-  );
-  pointer-events:none
+  )
 }
 
 .vinyl img{
@@ -167,7 +166,6 @@ section.visible{opacity:1;transform:none}
   font-size:.75rem;
   letter-spacing:.35em;
   color:var(--muted);
-  pointer-events:none;
   z-index:3
 }
 
@@ -189,20 +187,7 @@ section.visible{opacity:1;transform:none}
   border-radius:22px;
   max-width:700px;
   width:90%;
-  padding:2.5rem;
-  animation:pop .6s cubic-bezier(.16,1,.3,1)
-}
-@keyframes pop{from{transform:scale(.92);opacity:0}}
-
-form{max-width:620px}
-input,select,textarea{
-  width:100%;
-  background:var(--panel);
-  border:1px solid var(--border);
-  color:var(--text);
-  padding:1rem;
-  border-radius:14px;
-  margin-bottom:1rem
+  padding:2.5rem
 }
 
 footer{
@@ -261,12 +246,12 @@ footer{
   <h2 class="title">Releases</h2>
   <div class="grid">
     <a class="vinyl" href="https://www.youtube.com/watch?v=HooUcyI-OU0" target="_blank">
-      <img src="imaginatecover.jpg">
+      <img src="imaginatecover">
       <span>IMAGINATE • DJ AFRO REMIX</span>
     </a>
 
     <a class="vinyl" href="https://www.youtube.com/watch?v=wsHI4iYOxJA" target="_blank">
-      <img src="siveoatumamacover.jpg">
+      <img src="siveoatumamacover">
       <span>SI VEO A TU MAMÁ • DJ AFRO REMIX</span>
     </a>
   </div>
@@ -315,24 +300,9 @@ const content=document.getElementById("modalContent");
 function openModal(artist){
   modal.classList.add("active");
   content.innerHTML =
-    artist==="joaquin" ?
-    `
-    <h2>Joaquin</h2>
-    <p>Producer / DJ</p>
-    <a class="btn" href="https://open.spotify.com/artist/51FEMYGwPrDBRaHO7HyIcq" target="_blank">Spotify</a>
-    <a class="btn" href="https://music.apple.com/us/artist/joaquin/1832623241" target="_blank">Apple Music</a>
-    <a class="btn" href="https://www.youtube.com/@joaquinsounds" target="_blank">YouTube</a>
-    <a class="btn" href="https://soundcloud.com/joaquinsounds" target="_blank">SoundCloud</a>
-    <a class="btn" href="https://www.tiktok.com/@quinchomusic" target="_blank">TikTok</a>
-    `
-    :
-    `
-    <h2>Samu</h2>
-    <p>DJ / Producer</p>
-    <a class="btn" href="https://open.spotify.com/artist/2IfHdCurUyGRepjKTS02bd" target="_blank">Spotify</a>
-    <a class="btn" href="https://music.apple.com/us/artist/joaquin-samu/1838100911" target="_blank">Apple Music</a>
-    <a class="btn" href="https://instagram.com/samuuuuuuuuuuv" target="_blank">Instagram</a>
-    `;
+    artist==="joaquin"
+    ? `<h2>Joaquin</h2><p>Producer / DJ</p>`
+    : `<h2>Samu</h2><p>DJ / Producer</p>`;
 }
 
 modal.onclick=()=>modal.classList.remove("active");
