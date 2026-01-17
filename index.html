@@ -74,7 +74,7 @@ nav a:hover{color:var(--text)}
 section{
   max-width:1200px;
   margin:auto;
-  padding:7rem 1.5rem;
+  padding:5rem 1.5rem; /* reduced spacing */
   opacity:0;
   transform:translateY(28px);
   transition:1s cubic-bezier(.16,1,.3,1)
@@ -92,7 +92,7 @@ section.visible{opacity:1;transform:none}
 .hero p{color:var(--muted)}
 
 .title{font-size:2rem;margin-bottom:1rem}
-.sub{color:var(--muted);max-width:720px;margin-bottom:3rem}
+.sub{color:var(--muted);max-width:720px;margin-bottom:2.5rem}
 
 .grid{
   display:grid;
@@ -127,27 +127,56 @@ section.visible{opacity:1;transform:none}
   color:#000
 }
 
-/* RELEASES */
+/* RELEASES – VINYL */
 .release{
   position:relative;
-  border-radius:16px;
+  aspect-ratio:1;
+  border-radius:50%;
   overflow:hidden;
+  background:#000;
+  box-shadow:
+    inset 0 0 0 1px var(--border),
+    inset 0 0 40px rgba(0,0,0,.8),
+    0 18px 40px rgba(0,0,0,.6);
+  transition:.8s cubic-bezier(.16,1,.3,1);
+}
+.release::before{
+  content:"";
+  position:absolute;inset:0;
+  background:
+    radial-gradient(circle at center,
+      transparent 32%,
+      rgba(255,255,255,.05) 33%,
+      transparent 34%,
+      rgba(255,255,255,.04) 38%,
+      transparent 40%);
+  pointer-events:none;
 }
 .release img{
-  width:100%;
-  display:block;
-  transition:1.1s cubic-bezier(.16,1,.3,1)
+  position:absolute;
+  width:42%;
+  height:42%;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  object-fit:cover;
+  box-shadow:0 0 0 1px var(--border)
 }
-.release:hover img{transform:scale(1.08)}
 .release span{
-  position:absolute;inset:0;
-  display:grid;place-items:center;
-  font-size:2.5rem;
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  font-size:2.2rem;
   opacity:0;
+  background:rgba(0,0,0,.4);
   transition:.4s;
-  background:rgba(0,0,0,.35)
 }
-.release:hover span{opacity:.9}
+.release:hover{
+  transform:rotate(4deg) scale(1.05);
+}
+.release:hover span{opacity:1}
 
 /* MODAL */
 .modal{
@@ -182,7 +211,7 @@ input,select,textarea{
   margin-bottom:1rem
 }
 
-footer{text-align:center;padding:4rem 1.5rem;color:var(--muted);font-size:.85rem}
+footer{text-align:center;padding:3rem 1.5rem;color:var(--muted);font-size:.85rem}
 </style>
 </head>
 
