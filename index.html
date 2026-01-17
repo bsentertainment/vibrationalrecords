@@ -19,34 +19,21 @@
 
 *{box-sizing:border-box;margin:0;padding:0;font-family:Inter,sans-serif}
 html{scroll-behavior:smooth}
-body{
-  background:var(--bg);
-  color:var(--text);
-  transition:.6s cubic-bezier(.16,1,.3,1)
-}
+body{background:var(--bg);color:var(--text)}
 a{text-decoration:none;color:inherit}
 
 /* LOADER */
 #loader{
   position:fixed;inset:0;
   background:var(--bg);
-  display:grid;
-  place-items:center;
+  display:grid;place-items:center;
   z-index:9999;
   animation:fadeOut 1.2s ease forwards;
   animation-delay:1.6s
 }
-#loader img{
-  width:120px;
-  animation:pulse 1.6s ease infinite
-}
-@keyframes pulse{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.08)}
-}
-@keyframes fadeOut{
-  to{opacity:0;pointer-events:none}
-}
+#loader img{width:120px;animation:pulse 1.6s ease infinite}
+@keyframes pulse{50%{transform:scale(1.08)}}
+@keyframes fadeOut{to{opacity:0;pointer-events:none}}
 
 /* GRAIN */
 #grain{
@@ -83,8 +70,7 @@ section.visible{opacity:1;transform:none}
 
 .hero{
   min-height:100vh;
-  display:grid;
-  place-items:center;
+  display:grid;place-items:center;
   text-align:center
 }
 .hero img{width:180px;margin-bottom:2rem}
@@ -92,13 +78,14 @@ section.visible{opacity:1;transform:none}
 .hero p{color:var(--muted)}
 
 .title{font-size:2rem;margin-bottom:1rem}
-.sub{color:var(--muted);max-width:720px;margin-bottom:2.5rem}
+.sub{color:var(--muted);max-width:720px;margin-bottom:2rem}
 
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:1.6rem
+  gap:1.8rem
 }
+
 .card{
   background:var(--panel);
   border:1px solid var(--border);
@@ -107,10 +94,7 @@ section.visible{opacity:1;transform:none}
   transition:.5s cubic-bezier(.16,1,.3,1);
   cursor:pointer
 }
-.card:hover{
-  transform:translateY(-8px);
-  border-color:var(--accent)
-}
+.card:hover{transform:translateY(-8px);border-color:var(--accent)}
 
 .btn{
   display:inline-block;
@@ -122,61 +106,60 @@ section.visible{opacity:1;transform:none}
   margin:.3rem .2rem;
   transition:.3s
 }
-.btn:hover{
-  background:var(--accent);
-  color:#000
-}
+.btn:hover{background:var(--accent);color:#000}
 
-/* RELEASES – VINYL */
-.release{
+/* ===== VINYL RELEASES ===== */
+.vinyl{
   position:relative;
+  width:100%;
   aspect-ratio:1;
   border-radius:50%;
-  overflow:hidden;
-  background:#000;
-  box-shadow:
-    inset 0 0 0 1px var(--border),
-    inset 0 0 40px rgba(0,0,0,.8),
-    0 18px 40px rgba(0,0,0,.6);
-  transition:.8s cubic-bezier(.16,1,.3,1);
-}
-.release::before{
-  content:"";
-  position:absolute;inset:0;
   background:
-    radial-gradient(circle at center,
-      transparent 32%,
-      rgba(255,255,255,.05) 33%,
-      transparent 34%,
-      rgba(255,255,255,.04) 38%,
-      transparent 40%);
-  pointer-events:none;
+    radial-gradient(circle at center,#111 0%,#111 38%,#000 39%,#000 100%);
+  border:1px solid var(--border);
+  overflow:hidden;
+  transition:1s cubic-bezier(.16,1,.3,1)
 }
-.release img{
+.vinyl:hover{transform:scale(1.04) rotate(360deg)}
+
+.vinyl::after{
+  content:"";
   position:absolute;
-  width:42%;
-  height:42%;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
+  inset:8%;
+  border-radius:50%;
+  background:
+    repeating-radial-gradient(
+      circle,
+      rgba(255,255,255,.08) 0px,
+      rgba(255,255,255,.02) 1px,
+      transparent 3px,
+      transparent 6px
+    );
+  pointer-events:none
+}
+
+.vinyl img{
+  position:absolute;
+  inset:30%;
+  width:40%;
+  height:40%;
   border-radius:50%;
   object-fit:cover;
-  box-shadow:0 0 0 1px var(--border)
+  z-index:2
 }
-.release span{
+
+.vinyl span{
   position:absolute;
   inset:0;
-  display:grid;
-  place-items:center;
-  font-size:2.2rem;
-  opacity:0;
-  background:rgba(0,0,0,.4);
-  transition:.4s;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:.75rem;
+  letter-spacing:.35em;
+  color:var(--muted);
+  transform:rotate(-90deg);
+  pointer-events:none
 }
-.release:hover{
-  transform:rotate(4deg) scale(1.05);
-}
-.release:hover span{opacity:1}
 
 /* MODAL */
 .modal{
@@ -199,7 +182,6 @@ section.visible{opacity:1;transform:none}
 }
 @keyframes pop{from{transform:scale(.92);opacity:0}}
 
-/* FORM */
 form{max-width:620px}
 input,select,textarea{
   width:100%;
@@ -211,7 +193,7 @@ input,select,textarea{
   margin-bottom:1rem
 }
 
-footer{text-align:center;padding:3rem 1.5rem;color:var(--muted);font-size:.85rem}
+footer{text-align:center;padding:4rem 1.5rem;color:var(--muted);font-size:.85rem}
 </style>
 </head>
 
@@ -262,14 +244,14 @@ footer{text-align:center;padding:3rem 1.5rem;color:var(--muted);font-size:.85rem
   <h2 class="title">Releases</h2>
   <div class="grid">
 
-    <a class="release" href="https://www.youtube.com/watch?v=HooUcyI-OU0" target="_blank">
+    <a class="vinyl" href="https://www.youtube.com/watch?v=HooUcyI-OU0" target="_blank">
       <img src="Imaginate (DJ Afro Remix).jpg">
-      <span>▶</span>
+      <span>IMAGINATE • DJ AFRO REMIX</span>
     </a>
 
-    <a class="release" href="https://www.youtube.com/watch?v=wsHI4iYOxJA" target="_blank">
+    <a class="vinyl" href="https://www.youtube.com/watch?v=wsHI4iYOxJA" target="_blank">
       <img src="Si Veo a Tu Mamá (DJ Afro Remix).jpg">
-      <span>▶</span>
+      <span>SI VEO A TU MAMÁ • DJ AFRO REMIX</span>
     </a>
 
   </div>
@@ -318,12 +300,14 @@ function openModal(artist){
   content.innerHTML=artist==="joaquin"?
   `<h2>Joaquin</h2>
    <p>Producer / DJ</p>
+   <a class="btn" href="https://open.spotify.com/artist/51FEMYGwPrDBRaHO7HyIcq" target="_blank">Spotify</a>
    <a class="btn" href="https://music.apple.com/us/artist/joaquin/1832623241" target="_blank">Apple Music</a>
    <a class="btn" href="https://www.youtube.com/@joaquinsounds" target="_blank">YouTube</a>
    <a class="btn" href="https://soundcloud.com/joaquinsounds" target="_blank">SoundCloud</a>
    <a class="btn" href="https://www.tiktok.com/@quinchomusic" target="_blank">TikTok</a>` :
   `<h2>Samu</h2>
    <p>DJ / Producer</p>
+   <a class="btn" href="https://open.spotify.com/artist/2IfHdCurUyGRepjKTS02bd" target="_blank">Spotify</a>
    <a class="btn" href="https://music.apple.com/us/artist/joaquin-samu/1838100911" target="_blank">Apple Music</a>
    <a class="btn" href="https://instagram.com/samuuuuuuuuuuv" target="_blank">Instagram</a>`;
 }
