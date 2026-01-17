@@ -1,1 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vibrational Records</title>
 
+  <!-- SEO -->
+  <meta name="description" content="Vibrational Records — Resonance you can’t silence. Independent label, production, distribution, and artist development." />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #050505;
+      --panel: rgba(255,255,255,0.05);
+      --border: rgba(255,255,255,0.12);
+      --text: #f5f5f5;
+      --muted: #a1a1a1;
+      --accent: #d4af37;
+      --glow: 0 0 40px rgba(212,175,55,0.15);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #0b0b0b, var(--bg));
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* --- HERO --- */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 4rem 1.5rem;
+    }
+
+    .logo {
+      width: 180px;
+      margin-bottom: 2rem;
+      filter: drop-shadow(var(--glow));
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 600;
+      letter-spacing: -0.04em;
+    }
+
+    .hero p {
+      margin-top: 1rem;
+      font-size: 1.1rem;
+      color: var(--muted);
+    }
+
+    .divider {
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      margin: 2.5rem auto;
+    }
+
+    /* --- SECTIONS --- */
+    section {
+      padding: 6rem 1.5rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.03em;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      max-width: 700px;
+      margin-bottom: 3rem;
+    }
+
+    /* --- GLASS GRID --- */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 1.8rem;
+      border-radius: 18px;
+      backdrop-filter: blur(10px);
+      transition: transform .4s ease, box-shadow .4s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--glow);
+    }
+
+    .card h3 {
+      font-weight: 500;
+      margin-bottom: .6rem;
+    }
+
+    .card p {
+      font-size: .95rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* --- IMAGE STRIP --- */
+    .image-strip {
+      margin: 5rem 0;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .image-strip img {
+      width: 100%;
+      display: block;
+    }
+
+    /* --- LINKS --- */
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .link {
+      padding: .9rem 1.4rem;
+      border-radius: 999px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      font-size: .9rem;
+      transition: all .3s ease;
+    }
+
+    .link:hover {
+      background: var(--accent);
+      color: #000;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      padding: 4rem 1.5rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: .85rem;
+    }
+
+    /* --- REVEAL --- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all .8s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HERO -->
+  <div class="hero">
+    <img src="vrART.jpg" alt="Vibrational Records Logo" class="logo" />
+    <h1>Vibrational Records</h1>
+    <p>Resonance you can’t silence.</p>
+    <div class="divider"></div>
+  </div>
+
+  <!-- MANIFESTO -->
+  <section class="reveal">
+    <h2 class="section-title">The Label</h2>
+    <p class="section-sub">
+      Vibrational Records is an independent creative ecosystem focused on
+      high-fidelity sound, artist development, and cultural impact.
+      We operate where technology, nightlife, and emotion intersect.
+    </p>
+  </section>
+
+  <!-- IMAGE -->
+  <section class="reveal">
+    <div class="image-strip">
+      <img src="Screenshot 2026-01-17 at 4.43.14 PM.png" alt="Vibrational Records Services">
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="reveal">
+    <h2 class="section-title">What We Do</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Music Production</h3>
+        <p>Full instrumental production tailored to the artist’s sound.</p>
+      </div>
+      <div class="card">
+        <h3>Mixing & Mastering</h3>
+        <p>Industry-standard mixes with loud, clean masters.</p>
+      </div>
+      <div class="card">
+        <h3>Recording Sessions</h3>
+        <p>Professional studio sessions with an experienced engineer.</p>
+      </div>
+      <div class="card">
+        <h3>Distribution</h3>
+        <p>Unlimited releases with royalty collection and artist support.</p>
+      </div>
+      <div class="card">
+        <h3>Education</h3>
+        <p>Private production crash courses and creative mentorship.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARTISTS -->
+  <section class="reveal">
+    <h2 class="section-title">Artists & Network</h2>
+    <div class="links">
+      <a class="link" href="https://open.spotify.com/artist/51FEMYGwPrDBRaHO7HyIcq" target="_blank">Joaquin</a>
+      <a class="link" href="https://open.spotify.com/artist/2IfHdCurUyGRepjKTS02bd" target="_blank">Quincho</a>
+      <a class="link" href="https://www.instagram.com/quinchomusic/" target="_blank">@quinchomusic</a>
+      <a class="link" href="https://www.instagram.com/samuuuuuuuuuuv/" target="_blank">@samuuuuuuuuuuv</a>
+    </div>
+  </section>
+
+  <!-- CONNECT -->
+  <section class="reveal">
+    <h2 class="section-title">Connect</h2>
+    <div class="links">
+      <a class="link" href="https://www.instagram.com/vibrationalrecords/" target="_blank">Instagram</a>
+      <a class="link" href="https://soundcloud.com/bendersociety" target="_blank">SoundCloud</a>
+      <a class="link" href="https://quincho.art/" target="_blank">quincho.art</a>
+    </div>
+  </section>
+
+  <footer>
+    © <span id="year"></span> Vibrational Records. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    reveals.forEach(r => observer.observe(r));
+  </script>
+
+</body>
+</html>
